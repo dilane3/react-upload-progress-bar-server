@@ -1,0 +1,28 @@
+{
+  "name": "react-upload-progress-bar-server",
+  "version": "1.0.0",
+  "description": "upload file server",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "upload",
+    "progression",
+    "progress",
+    "file",
+    "react",
+    "nodejs",
+    "express"
+  ],
+  "author": "dilane3",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "multer": "^1.4.3"
+  }
+}

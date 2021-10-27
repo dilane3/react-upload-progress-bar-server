@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Document</title>
+
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            font-family: ubuntu, Arial, Helvetica, sans-serif;
+            background-color: royalblue;
+        }
+
+        form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: auto;
+            min-height: 150px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(24, 23, 23, 0.5);
+            background-color: #f4f4f4;
+        }
+
+        .file-uploader {
+            width: all;
+            height: 80px;
+            border-radius: 5px;
+            border: 3px dashed royalblue;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: royalblue
+        }
+
+        .file-uploader:hover {
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            height: 60px;
+            border-radius: 5px;
+            padding: 5px;
+            color: #fff;
+            background-color: #3e4bff;
+            border: none;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form enctype="multipart/form-data">
+        <input type="file" hidden accept="image/*">
+        <div class="file-uploader">Choose file</div>
+        <button>upload</button>
+    </form>
+
+    <script>
+        const inputFile = document.querySelector("input[type=file]")
+        const trigger = document.querySelector(".file-uploader")
+        const btnUpload = document.querySelector('button')
+
+        trigger.onclick = function() {
+            inputFile.click()
+        }
+
+        btnUpload.onclick = (event) => {
+            event.preventDefault()
+
+            const file = inputFile.files[0]
+
+            if (file) {
+                const formData = new FormData()
+
+                formData.append("image", file)
+
+                fetch("http://localhost:5000/file/upload", {method: "post", body: formData})
+                .then(res => res.json())
+                .then(res => console.log(res.data))
+                .catch(err => console.log(err))
+            } else {
+                alert("selectionner une image")
+            }
+        }
+    </script>
+</body>
+</html>
