@@ -57,6 +57,7 @@
             border: none;
             font-size: 20px;
             font-weight: 600;
+            transition: opacity .3s;
         }
 
         button:hover {
@@ -68,7 +69,7 @@
     <form enctype="multipart/form-data">
         <input type="file" hidden accept="image/*">
         <div class="file-uploader">Choose file</div>
-        <button>upload</button>
+        <button style="opacity: .5;">upload</button>
     </form>
 
     <script>
@@ -78,6 +79,12 @@
 
         trigger.onclick = function() {
             inputFile.click()
+        }
+
+        inputFile.onchange = () => {
+            if(inputFile.files[0]) {
+                btnUpload.style.opacity = 1
+            }
         }
 
         btnUpload.onclick = (event) => {
@@ -92,7 +99,7 @@
 
                 fetch("http://localhost:5000/file/upload", {method: "post", body: formData})
                 .then(res => res.json())
-                .then(res => console.log(res.data))
+                .then(res => console.log(res))
                 .catch(err => console.log(err))
             } else {
                 alert("selectionner une image")

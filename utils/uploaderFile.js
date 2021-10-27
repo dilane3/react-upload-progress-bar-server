@@ -2,7 +2,7 @@ const multer = require("multer")
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "upload")
+        cb(null, "upload/file")
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + "--" + file.originalname)
@@ -10,6 +10,7 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (req, file, cb) => {
+    console.log(file)
     if(
         (file.mimetype).includes('gif')     || 
         (file.mimetype).includes('jpeg')    || 
