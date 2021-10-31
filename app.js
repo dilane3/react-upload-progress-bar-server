@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 })
 
 // use router
-app.use("/file", fileRouter)
+app.use("/api/file", fileRouter)
 
 // open the server
 app.listen(PORT, () => console.log(`server is running on localhost:${PORT}`))
